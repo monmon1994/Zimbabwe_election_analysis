@@ -51,6 +51,105 @@ count_plot  %>%
           plot.title = element_text(size = 18), 
           plot.title.position = "plot") 
 
-## types of conflict
+## types of conflict "Violence against citizens" main graph
+
+breaks <- c(1998, 2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016, 2018, 2020)
+
+acled %>% 
+    filter(event_type_dummy == 1) %>% 
+ggplot(aes(x = year, y = event_type_dummy, fill = sub_event_type)) +
+    geom_bar(stat = "identity") +
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_continuous(breaks = breaks, labels = breaks) +
+    scale_fill_viridis_d() +
+    labs(title = "Frequency of violence against citizens in Zimbabwe ",
+         subtitle = "The ACLED dataset 1997-2020",
+         y = "", x = "") +
+    annotate("text", x = 1998, y = 150, label = "Economic crisis") + #economic
+    annotate("segment", x = 1998, y = 140, xend = 1998, yend = 20,
+             arrow = arrow(length = unit(0.2, "cm"), type = "closed")) +
+    annotate("text", x = 2000, y = 350, label = "Farm invasions") + # farm
+    annotate("segment", x = 2000, y = 340, xend = 2000, yend = 280,
+             arrow = arrow(length = unit(0.2, "cm"), type = "closed")) +
+    annotate("text", x = 2000, y = 700, label = "Mugabe wins six-year term in election") + # mugabe election
+    annotate("curve", x = 2000, y = 680, xend = 2001.5, yend = 650,
+             arrow = arrow(length = unit(0.2, "cm"), type = "closed")) +
+    annotate("text", x = 2005, y = 400, 
+             label = paste(strwrap("Tsvangirai and MDC officials assaulted by police in a pro-democracy march.", 30), collapse = "\n")) +
+    annotate("segment", x = 2005, y = 350, xend = 2007, yend = 160,
+             arrow = arrow(length = unit(0.2, "cm"), type = "closed")) +
+    annotate("text", x = 2011, y = 700, 
+             label = paste(strwrap("Mugabe declared winner of run-off presidential election", 40), collapse = "\n")) +
+    annotate("curve", x = 2011, y = 660, xend = 2008.5, yend = 600,
+             arrow = arrow(length = unit(0.2, "cm"), type = "closed"), curvature = -0.2) +
+    annotate("text", x = 2015, y = 280, 
+             label = paste(strwrap("Mugabe resigns days after the military takes control", 40), collapse = "\n")) +
+    annotate("segment", x = 2015, y = 250, xend = 2017, yend = 170,
+             arrow = arrow(length = unit(0.2, "cm"), type = "closed")) +
+    annotate("text", x = 2018, y = 430, 
+             label = paste(strwrap("Mnangagwa narrowly wins presidential election over Nelson Chamisa", 40), collapse = "\n")) +
+    annotate("segment", x = 2019, y = 400, xend = 2018, yend = 170,
+             arrow = arrow(length = unit(0.2, "cm"), type = "closed")) +
+    theme(panel.background = element_blank(),
+          text = element_text(family = "Helvetica", size = 13),
+          panel.grid.major = element_line(colour = "#f0f0f0"),
+          panel.grid.minor = element_blank(),
+          axis.ticks = element_blank(),
+          strip.background = element_rect(fill = "#f5f5f5"),
+          plot.background = element_blank(),
+          strip.text.x = element_text(hjust = 0),
+          plot.caption = element_text(hjust = 0),
+          plot.title = element_text(size = 18),
+          legend.position = "bottom") +
+    guides(fill = guide_legend(title = "Type of violence"))
+
+ggsave("barplot_zim_violence.png", dpi = 600, width = 12, height = 8)
+
+## violence against citizens actors involved 
+
+acled %>% 
+    filter(event_type_dummy == 1) %>% 
+    ggplot(aes(x = year, y = event_type_dummy, fill = actor1)) +
+    geom_bar(stat = "identity") +
+    scale_y_continuous(labels = scales::comma) +
+    scale_fill_viridis_d(option = "A") +
+    labs(title = "Frequency of violence against citizens in Zimbabwe",
+         subtitle = "The ACLED dataset 1997-2020") +
+    theme(panel.background = element_blank(),
+          text = element_text(family = "Helvetica", size = 13),
+          panel.grid.major = element_line(colour = "#f0f0f0"),
+          panel.grid.minor = element_blank(),
+          axis.ticks = element_blank(),
+          strip.background = element_rect(fill = "#f5f5f5"),
+          plot.background = element_blank(),
+          strip.text.x = element_text(hjust = 0),
+          plot.caption = element_text(hjust = 0),
+          plot.title = element_text(size = 18), 
+          plot.title.position = "plot",
+          legend.position = "right") +
+    guides(fill = guide_legend(title = "Actors"))
+
+ggsave("barplot_zim_violence2.png", dpi = 600, width = 12, height = 8)
+
+## Strategic developments
+
+acled %>% 
+    filter(event_type_dummy == 4) %>% 
+    ggplot(aes(x = year, y = event_type_dummy)) +
+    geom_bar(stat = "identity") +
+    scale_y_continuous(labels = scales::comma) +
+    labs(title = "Frequency of strategic developments in Zimbabwe by the ACLED dataset 1997-2020",
+         subtitle = " ") +
+    theme(panel.background = element_blank(),
+          text = element_text(family = "Helvetica", size = 13),
+          panel.grid.major = element_line(colour = "#f0f0f0"),
+          panel.grid.minor = element_blank(),
+          axis.ticks = element_blank(),
+          strip.background = element_rect(fill = "#f5f5f5"),
+          plot.background = element_blank(),
+          strip.text.x = element_text(hjust = 0),
+          plot.caption = element_text(hjust = 0),
+          plot.title = element_text(size = 18), 
+          plot.title.position = "plot") 
 
 
