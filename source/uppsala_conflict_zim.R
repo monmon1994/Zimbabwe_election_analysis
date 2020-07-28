@@ -105,6 +105,34 @@ ggplot(aes(x = year, y = event_type_dummy, fill = sub_event_type)) +
 
 ggsave("barplot_zim_violence.png", dpi = 600, width = 12, height = 8)
 
+## violence by monthly 
+
+acled %>% 
+    filter(event_type_dummy == 1) %>% 
+    filter(year %in% c(2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012,2013,2014,2015,2016,2016,2018,2019,2020)) %>% 
+    ggplot(aes(x = event_date, y = event_type_dummy, fill = sub_event_type)) +
+    geom_bar(stat = "identity") +
+    geom_vline(xintercept = as.Date(""))
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_date(date_labels = "%B", date_breaks = "6 months") +
+    scale_fill_viridis_d() +
+    labs(title = "Frequency of violence against citizens in Zimbabwe",
+         subtitle = "The ACLED dataset 1997-2020",
+         y = "", x = "") +
+    theme(panel.background = element_blank(),
+          text = element_text(family = "Helvetica", size = 13),
+          panel.grid.major = element_line(colour = "#f0f0f0"),
+          panel.grid.minor = element_blank(),
+          axis.ticks = element_blank(),
+          strip.background = element_rect(fill = "#f5f5f5"),
+          plot.background = element_blank(),
+          strip.text.x = element_text(hjust = 0),
+          plot.caption = element_text(hjust = 0),
+          plot.title = element_text(size = 18),
+          legend.position = "bottom",
+          axis.text.x = element_text(angle=45, hjust = 1))
+
+
 ## violence against citizens actors involved 
 
 acled %>% 
@@ -127,7 +155,7 @@ acled %>%
           plot.title = element_text(size = 18), 
           plot.title.position = "plot",
           legend.position = "right") +
-    guides(fill = guide_legend(title = "Actors"))
+    guides(fill = "none")
 
 ggsave("barplot_zim_violence2.png", dpi = 600, width = 12, height = 8)
 
@@ -151,5 +179,7 @@ acled %>%
           plot.caption = element_text(hjust = 0),
           plot.title = element_text(size = 18), 
           plot.title.position = "plot") 
+
+
 
 
