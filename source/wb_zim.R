@@ -61,3 +61,18 @@ ggplot(merge, aes(x = year)) +
          caption = "Source: World Bank, July 2020")
 
 ggsave("zim_gdp_rl.png", dpi = 600, width = 8, height = 8) 
+
+### corruption
+
+cc <- readr::read_csv("data/wgi_all_10.csv")
+
+colnames(cc) <- c("country", "iso3c", "series_name", "series_code", 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009)
+
+cc_tidy <- cc %>% 
+    gather(year, value, `2018`:`2009`) # create a column for year 
+
+cc_tidy <- cc_tidy %>% 
+    pivot_longer()   
+
+
+

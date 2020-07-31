@@ -105,18 +105,18 @@ ggplot(aes(x = year, y = event_type_dummy, fill = sub_event_type)) +
 
 ggsave("barplot_zim_violence.png", dpi = 600, width = 12, height = 8)
 
-## violence by monthly 
+## violence by monthly 2008
 
 acled %>% 
-    filter(event_type_dummy == 1) %>% 
-    filter(year %in% c(2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2012,2013,2014,2015,2016,2016,2018,2019,2020)) %>% 
+    filter(event_type_dummy == 1) %>%
+    filter(year == 2008) %>% 
     ggplot(aes(x = event_date, y = event_type_dummy, fill = sub_event_type)) +
     geom_bar(stat = "identity") +
-    geom_vline(xintercept = as.Date(""))
+    #geom_vline(xintercept = as.Date(""))
     scale_y_continuous(labels = scales::comma) +
-    scale_x_date(date_labels = "%B", date_breaks = "6 months") +
+    scale_x_date(date_labels = "%B", date_breaks = "1 month") +
     scale_fill_viridis_d() +
-    labs(title = "Frequency of violence against citizens in Zimbabwe",
+    labs(title = "Frequency of violence against citizens in Zimbabwe 2008",
          subtitle = "The ACLED dataset 1997-2020",
          y = "", x = "") +
     theme(panel.background = element_blank(),
@@ -131,6 +131,86 @@ acled %>%
           plot.title = element_text(size = 18),
           legend.position = "bottom",
           axis.text.x = element_text(angle=45, hjust = 1))
+
+## 2000-2010
+
+acled %>% 
+    filter(event_type_dummy == 1) %>%
+    filter(year %in% c(2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000)) %>% 
+    ggplot(aes(x = event_date, y = event_type_dummy, fill = sub_event_type)) +
+    geom_bar(stat = "identity") +
+    geom_vline(xintercept = as.Date("2000-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2001-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2002-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2003-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2004-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2005-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2006-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2007-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2008-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2009-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2010-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_date(date_labels = "%Y", date_breaks = "1 year") +
+    scale_fill_viridis_d() +
+    labs(title = "Frequency of violence against citizens in Zimbabwe",
+         subtitle = "The ACLED dataset 2000-2010",
+         y = "", x = "") +
+    theme(panel.background = element_blank(),
+          text = element_text(family = "Helvetica", size = 13),
+          panel.grid.major = element_line(colour = "#f0f0f0"),
+          panel.grid.minor = element_blank(),
+          axis.ticks = element_blank(),
+          strip.background = element_rect(fill = "#f5f5f5"),
+          plot.background = element_blank(),
+          strip.text.x = element_text(hjust = 0),
+          plot.caption = element_text(hjust = 0),
+          plot.title = element_text(size = 18),
+          legend.position = "bottom",
+          axis.text.x = element_text(angle=45, hjust = 1))+
+    guides(fill = guide_legend(title = "Type of violence"))
+
+ggsave("monthly_zim_violence2000.png", dpi = 600, width = 10, height = 8)
+
+## 2011-2020
+
+acled %>% 
+    filter(event_type_dummy == 1) %>%
+    filter(year %in% c(2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011)) %>% 
+    ggplot(aes(x = event_date, y = event_type_dummy, fill = sub_event_type)) +
+    geom_bar(stat = "identity") +
+    geom_vline(xintercept = as.Date("2011-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2012-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2013-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2014-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2015-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2016-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2017-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2018-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2019-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    geom_vline(xintercept = as.Date("2020-01-01"), linetype = "dashed", size = 0.5, alpha = 0.3) +
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_date(date_labels = "%B", date_breaks = "6 months") +
+    scale_fill_viridis_d() +
+    labs(title = "Frequency of violence against citizens in Zimbabwe",
+         subtitle = "The ACLED dataset 2011-2020",
+         y = "", x = "") +
+    theme(panel.background = element_blank(),
+          text = element_text(family = "Helvetica", size = 13),
+          panel.grid.major = element_line(colour = "#f0f0f0"),
+          panel.grid.minor = element_blank(),
+          axis.ticks = element_blank(),
+          strip.background = element_rect(fill = "#f5f5f5"),
+          plot.background = element_blank(),
+          strip.text.x = element_text(hjust = 0),
+          plot.caption = element_text(hjust = 0),
+          plot.title = element_text(size = 18),
+          legend.position = "bottom",
+          axis.text.x = element_text(angle=45, hjust = 1))+
+    guides(fill = guide_legend(title = "Type of violence"))
+
+ggsave("monthly_zim_violence2011.png", dpi = 600, width = 10, height = 8)
+
 
 
 ## violence against citizens actors involved 
